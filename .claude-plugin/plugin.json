@@ -1,0 +1,9 @@
+{
+  "name": "trades-office-starter",
+  "version": "0.2.0",
+  "description": "Free starter for HVAC, plumbing, electrical, and remodeling contractors: sort missed calls and voicemails into a callback order with emergencies on top, and get a plain-English Friday business report from QuickBooks and your calendar. Built for residential trades and field service. Works alongside the Small Business plugin. Guided setup, one afternoon, nothing sends without your OK.",
+  "author": {
+    "name": "[YOUR NAME / BUSINESS]",
+    "url": "https://example.com"
+  }
+}

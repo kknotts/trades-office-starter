@@ -1,0 +1,24 @@
+name: Validate plugin
+on: [push, pull_request]
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check manifest and skills
+        run: |
+          python3 - << 'PY'
+          import json, glob, re, sys
+          m = json.load(open('.claude-plugin/plugin.json'))
+          for k in ('name', 'version', 'description'):
+              assert m.get(k), f"plugin.json missing {k}"
+          skills = glob.glob('skills/*/SKILL.md')
+          assert skills, "no skills found"
+          for p in skills:
+              s = open(p).read()
+              assert s.startswith('---'), f"{p}: missing frontmatter"
+              fm = s.split('---')[1]
+              assert 'name:' in fm and 'description:' in fm, f"{p}: frontmatter incomplete"
+              assert '\u2014' not in s, f"{p}: contains an em-dash"
+          print(f"OK: manifest plus {len(skills)} skills")
+          PY
